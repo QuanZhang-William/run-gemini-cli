@@ -67,6 +67,9 @@ inputs:
   enable_security_analysis:
     description: 'A flag to indicate if security analysis should be enabled.'
     required: false
+  pat:
+    description: 'A personal access token to install private Gemini extension'
+    required: false
 
 outputs:
   summary:
@@ -154,7 +157,8 @@ runs:
         fi
         if [[ ${{ inputs.enable_security_analysis }} ]]; then
           echo "Installing Gemini Security Extension"
-          gemini extensions install --source https://github.com/pauldatta/gemini-cli-extensions-demo
+          PAT=${{ inputs.pat }}
+          gemini extensions install --source https://QuanZhang-William:${PAT}@github.com/QuanZhang-William/gemini-cli-security.git
         fi
 
     - name: 'Run Gemini CLI'
