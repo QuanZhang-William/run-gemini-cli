@@ -64,6 +64,9 @@ inputs:
   gemini_model:
     description: 'The model to use with Gemini.'
     required: false
+  enable_security_analysis:
+    description: 'A flag to indicate if security analysis should be enabled.'
+    required: false
 
 outputs:
   summary:
@@ -147,6 +150,9 @@ runs:
           echo "Error: Gemini CLI not found in PATH"
           exit 1
         fi
+        if [[ ${{ inputs.enable_security_analysis }} ]]; then
+          echo "Installing Gemini Security Extension"
+          gemini extensions install --source https://github.com/google-gemini/gemini-cli-security
 
     - name: 'Run Gemini CLI'
       id: 'gemini_run'
