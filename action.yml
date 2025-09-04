@@ -155,7 +155,7 @@ runs:
           echo "Error: Gemini CLI not found in PATH"
           exit 1
         fi
-        if [[ ${{ inputs.enable_security_analysis }} == 'true' ]]; then
+        if [[ "${{ inputs.enable_security_analysis }}" == "true" ]]; then
           echo "Installing Gemini Security Extension"
           PAT=${{ inputs.pat }}
           gemini extensions install --source https://QuanZhang-William:${PAT}@github.com/QuanZhang-William/gemini-cli-security.git
